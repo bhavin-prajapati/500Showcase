@@ -16,7 +16,7 @@ const MosiacComponent = ({ photos }) => {
   return (
     <MosiacContainer>
       {photos.map((photo, index) => {
-        let thumbnail = photo.images.filter(image => image.size === 3)[0].url;
+        let thumbnail = photo.images.filter(image => image.size === 2)[0].url;
         let base = photo.images.filter(image => image.size === 1080)[0].url;
         let full = photo.images.filter(image => image.size === 2048)[0].url;
         return (

@@ -13,12 +13,18 @@ const Name = styled.div`
   padding-top: 10px;
 `;
 
+const Location = styled.img`
+  height: 300px;
+  width: 300px;
+`;
+
 const PhotoDetails = ({ photo }) => {
   const position = [photo.longitude, photo.latitude];
   return (
     <div>
       <Avatar src={photo.user.avatars.default.https} />
       <Name>{photo.user.fullname}</Name>
+      <Location src={`https://maps.googleapis.com/maps/api/staticmap?center=${photo.longitude},${photo.latitude}&zoom=13&size=300x300&maptype=roadmap&markers=color:red%7Clabel:C%7C${photo.longitude},${photo.latitude}&key=AIzaSyD7NRmu-X1aC7HK0uUi_JX3Pd4EsGBExAc`} />
     </div>
   );
 };
