@@ -3,6 +3,7 @@ import { Modal } from "react-bootstrap";
 import styled, { keyframes } from "styled-components";
 import PhotoDetails from "./PhotoDetails";
 import MaterialIcon from "material-icons-react";
+import Fullscreen from "react-full-screen";
 
 const focusIn = keyframes`
   0% { 
@@ -127,7 +128,17 @@ const FullscreenContainer = styled.div`
     vertical-align: middle;
     padding: 5px;
   }
+
+  .fullscreen {
+    text-align: center;
+
+    img {
+      width: initial;
+    }
+  }
 `;
+
+const FullscreenButton = styled.div``;
 
 const Rating = styled.div`
   padding: 10px;
@@ -193,6 +204,7 @@ const Views = styled.div`
 
 function StyledImage(props) {
   const [showModal, setShowModal] = useState(false);
+  const [isFull, setIsFull] = useState(false);
 
   const closeFullscreen = () => {
     setShowModal(false);
@@ -215,7 +227,15 @@ function StyledImage(props) {
           <FullImage src={props.full} />
           <PhotoName>{props.photo.name}</PhotoName>
           <FullscreenContainer>
-            <MaterialIcon icon="fullscreen" />
+            <FullscreenButton onClick={() => setIsFull(true)}>
+              <MaterialIcon icon="fullscreen" />
+            </FullscreenButton>
+            <Fullscreen enabled={isFull} onChange={isFull => setIsFull(isFull)}>
+              <FullImage
+                style={{ display: isFull ? "inline-block" : "none" }}
+                src={props.full}
+              />
+            </Fullscreen>
           </FullscreenContainer>
           <Rating>
             {props.photo.rating}
