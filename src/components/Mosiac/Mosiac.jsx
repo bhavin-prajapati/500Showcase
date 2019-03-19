@@ -7,7 +7,7 @@ import styled from "styled-components";
 import StyledImage from "../Mosiac/StyledImage";
 
 const MosiacContainer = styled.div`
-  background: black;
+  background: white;
   text-align: center;
 `;
 

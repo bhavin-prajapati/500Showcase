@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import styled, { keyframes } from "styled-components";
 import PhotoDetails from "./PhotoDetails";
+import MaterialIcon from "material-icons-react";
 
 const focusIn = keyframes`
   0% { 
@@ -10,14 +11,14 @@ const focusIn = keyframes`
     width: 100%;
     opacity: 0.8;
     padding: 0%;
+    box-shadow: 0 0 0 rgba(0,0,0), 0 0 0 rgba(0,0,0);
   }
   100% { 
     margin: -10% -10% -10% -10%; 
     height: 120%; 
     width: 120%;
     opacity: 1;
-    padding: 3%;
-    background: #00aaff;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
   }
 `;
 
@@ -27,8 +28,7 @@ const focusOut = keyframes`
     height: 120%; 
     width: 120%;
     opacity: 1;
-    padding: 3%;
-    background: #00aaff;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
   }
   100% { 
     margin: 0 0 0 0; 
@@ -36,6 +36,7 @@ const focusOut = keyframes`
     width: 100%;
     opacity: 0.8;
     padding: 0%;
+    box-shadow: 0 0 0 rgba(0,0,0), 0 0 0 rgba(0,0,0);
   }
 `;
 
@@ -65,8 +66,7 @@ const Thumbnail = styled.img`
     z-index: 100;
     margin: -10% -10% -10% -10%;
     animation: ${focusIn} 0.5s;
-    padding: 3%;
-    background: #00aaff;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
   }
 `;
 
@@ -107,6 +107,90 @@ const PhotoName = styled.div`
     1px 1px 1px rgba(0, 0, 0, 0.5);
 `;
 
+const FullscreenContainer = styled.div`
+  padding: 10px;
+  text-align: right;
+  position: fixed;
+  right: 20%;
+  vertical-align: top;
+  top: 0px;
+  color: lightgray;
+  cursor: pointer;
+  text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1),
+    1px 1px 1px rgba(0, 0, 0, 0.5);
+
+  i {
+    font-size: 70px !important;
+    color: lightgray !important;
+    text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1),
+      1px 1px 1px rgba(0, 0, 0, 0.5);
+    vertical-align: middle;
+    padding: 5px;
+  }
+`;
+
+const Rating = styled.div`
+  padding: 10px;
+  text-align: right;
+  position: fixed;
+  right: 20%;
+  vertical-align: top;
+  top: 70px;
+  font-size: 18px;
+  color: lightgray;
+  text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1),
+    1px 1px 1px rgba(0, 0, 0, 0.5);
+
+  i {
+    color: lightgray !important;
+    text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1),
+      1px 1px 1px rgba(0, 0, 0, 0.5);
+    vertical-align: middle;
+    padding: 5px;
+  }
+`;
+
+const Votes = styled.div`
+  padding: 10px;
+  text-align: right;
+  position: fixed;
+  right: 20%;
+  vertical-align: top;
+  top: 100px;
+  font-size: 18px;
+  color: lightgray;
+  text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1),
+    1px 1px 1px rgba(0, 0, 0, 0.5);
+
+  i {
+    color: lightgray !important;
+    text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1),
+      1px 1px 1px rgba(0, 0, 0, 0.5);
+    vertical-align: middle;
+    padding: 5px;
+  }
+`;
+
+const Views = styled.div`
+  padding: 10px;
+  text-align: right;
+  position: fixed;
+  right: 20%;
+  vertical-align: top;
+  top: 130px;
+  font-size: 18px;
+  color: lightgray;
+  text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1),
+    1px 1px 1px rgba(0, 0, 0, 0.5);
+  i {
+    color: lightgray !important;
+    text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1),
+      1px 1px 1px rgba(0, 0, 0, 0.5);
+    vertical-align: middle;
+    padding: 5px;
+  }
+`;
+
 function StyledImage(props) {
   const [showModal, setShowModal] = useState(false);
 
@@ -130,6 +214,21 @@ function StyledImage(props) {
         <FullImageContainer>
           <FullImage src={props.full} />
           <PhotoName>{props.photo.name}</PhotoName>
+          <FullscreenContainer>
+            <MaterialIcon icon="fullscreen" />
+          </FullscreenContainer>
+          <Rating>
+            {props.photo.rating}
+            <MaterialIcon icon="star" />
+          </Rating>
+          <Votes>
+            {props.photo.positive_votes_count}
+            <MaterialIcon icon="favorite" />
+          </Votes>
+          <Views>
+            {props.photo.times_viewed}
+            <MaterialIcon icon="remove_red_eye" />
+          </Views>
         </FullImageContainer>
         <PhotoDetailsContainer>
           <PhotoDetails photo={props.photo} />
